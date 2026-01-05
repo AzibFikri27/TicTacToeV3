@@ -1,12 +1,13 @@
 #include "XShape.hpp"
 #include <winbgim.h>
 
-#define COLOR_X COLOR(255, 87, 34)
+#define COLOR_X COLOR(255, 0, 0) // Bright Red for 8-bit style
 
 void XShape::draw(int x, int y, int size) {
     setcolor(COLOR_X);
     setlinestyle(SOLID_LINE, 0, 9);
     int padding = 30;
+    // Draw thick lines for pixelated feel
     line(x + padding, y + padding, x + size - padding, y + size - padding);
     line(x + size - padding, y + padding, x + padding, y + size - padding);
 }

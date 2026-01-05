@@ -17,4 +17,5 @@ public:
     const std::string& getName() const;
     int getScore() const;
     void incrementScore();
+    void resetScore();
 };

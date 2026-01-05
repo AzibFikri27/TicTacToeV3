@@ -20,3 +20,7 @@ int Player::getScore() const {
 void Player::incrementScore() {
     score++;
 }
+
+void Player::resetScore() {
+    score = 0;
+}

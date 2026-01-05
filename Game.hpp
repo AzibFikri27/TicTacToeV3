@@ -5,11 +5,13 @@
 #include "XShape.hpp"
 #include "OShape.hpp"
 #include <string>
+#include <ctime>
 
 enum class GameState {
     START_PAGE,
     PLAYING,
-    GAME_OVER
+    GAME_OVER,
+    EXIT
 };
 
 class Game {
@@ -22,6 +24,8 @@ private:
     int winningLine[4];
     GameState currentState;
     std::string outcomeMessage;
+    clock_t gameOverTimer;
+    void* bgImage; // Buffer for background image
 
 public:
     Game();
@@ -34,10 +38,15 @@ private:
     bool checkWin();
     bool checkDraw();
     void resetGame();
+    void resetScores();
 
     void drawScoreboard();
-    void drawWinningLine();
+    void animateWinningLine();
     void drawStartPage();
-    void drawGameOver();
+    void drawGameOver(); // Kept for compatibility if needed, or I can remove/repurpose
     void drawBackground();
+
+    // New methods for popup
+    void showGameOverAnimation(const std::string& message);
+    void drawPopup(const std::string& message);
 };

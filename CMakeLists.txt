@@ -19,4 +19,4 @@ include_directories(${BGI_INCLUDE_DIR})
 
 add_executable(TicTacToeV3 main.cpp XShape.cpp OShape.cpp Cell.cpp Grid.cpp Player.cpp Game.cpp)
 
-target_link_libraries(TicTacToeV3 ${BGI_LIBRARY} gdi32 user32 comdlg32 winmm)
+target_link_libraries(TicTacToeV3 ${BGI_LIBRARY} gdi32 user32 comdlg32 winmm Threads::Threads)
