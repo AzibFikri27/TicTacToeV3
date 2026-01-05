@@ -3,7 +3,6 @@
 Player::Player(Shape* playerShape, const std::string& name) : shape(playerShape), name(name), score(0) {}
 
 Player::~Player() {
-    delete shape;
 }
 
 Shape* Player::getShape() const {

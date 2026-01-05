@@ -1,4 +1,5 @@
 #include "OShape.hpp"
+#include <winbgim.h>
 
 #define COLOR_O COLOR(3, 169, 244)
 

@@ -1,7 +1,7 @@
 #include "XShape.hpp"
+#include <winbgim.h>
 
-// Define modern colors
-#define COLOR_X COLOR(255, 87, 34) // Deep Orange
+#define COLOR_X COLOR(255, 87, 34)
 
 void XShape::draw(int x, int y, int size) {
     setcolor(COLOR_X);

@@ -4,6 +4,7 @@
 #include "Player.hpp"
 #include "XShape.hpp"
 #include "OShape.hpp"
+#include <string>
 
 enum class GameState {
     START_PAGE,
@@ -13,7 +14,6 @@ enum class GameState {
 
 class Game {
 private:
-    // Attributes
     Grid grid;
     Player player1;
     Player player2;
@@ -24,21 +24,17 @@ private:
     std::string outcomeMessage;
 
 public:
-    // Constructors and destructor
     Game();
     ~Game();
 
-    // Main Game Loop
     void run();
 
 private:
-    // Game Logic Methods
     void switchPlayer();
     bool checkWin();
     bool checkDraw();
     void resetGame();
 
-    // Rendering Methods
     void drawScoreboard();
     void drawWinningLine();
     void drawStartPage();

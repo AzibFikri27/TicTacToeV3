@@ -5,13 +5,12 @@
 #include <sstream>
 #include <cmath>
 
-// Glassmorphism Colors
 #define COLOR_BACKGROUND_DARK COLOR(20, 20, 40)
-#define COLOR_GLASS_FILL "rgba(255, 255, 255, 0.1)" // Not supported, using a solid color
+#define COLOR_GLASS_FILL "rgba(255, 255, 255, 0.1)"
 #define COLOR_GLASS_BORDER COLOR(255, 255, 255)
 #define COLOR_TEXT COLOR(230, 230, 250)
-#define COLOR_ACCENT_1 COLOR(102, 51, 153) // Deep Purple
-#define COLOR_ACCENT_2 COLOR(255, 105, 180) // Hot Pink
+#define COLOR_ACCENT_1 COLOR(102, 51, 153)
+#define COLOR_ACCENT_2 COLOR(255, 105, 180)
 
 Game::Game() : player1(new XShape(), "Player X"), player2(new OShape(), "Player O"), currentPlayer(&player1), page(0), currentState(GameState::START_PAGE) {
     initwindow(900, 600, "Tic Tac Toe");
@@ -89,7 +88,6 @@ void Game::run() {
 }
 
 void Game::drawBackground() {
-    // This function is now empty to provide a solid background
 }
 
 void Game::drawStartPage() {
@@ -99,7 +97,6 @@ void Game::drawStartPage() {
     int textWidth = textwidth(title);
     outtextxy((900 - textWidth) / 2, 200, title);
 
-    // Draw Button
     setfillstyle(SOLID_FILL, COLOR(60, 60, 80));
     bar(350, 400, 550, 475);
     setcolor(COLOR_GLASS_BORDER);
@@ -126,7 +123,7 @@ void Game::drawGameOver() {
     if (winningLine[0] != -1) {
         drawWinningLine();
     }
-    
+
     setcolor(COLOR(50, 205, 50));
     if (outcomeMessage == "It's a Draw!") {
         setcolor(COLOR_TEXT);
@@ -196,7 +193,6 @@ bool Game::checkDraw() {
 }
 
 void Game::drawScoreboard() {
-    // Draw panel for the scoreboard
     setfillstyle(SOLID_FILL, COLOR(40, 40, 60));
     bar(580, 40, 880, 560);
     setcolor(COLOR_GLASS_BORDER);
