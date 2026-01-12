@@ -1,7 +1,7 @@
 #include "Grid.hpp"
 #include <winbgim.h>
 
-#define COLOR_GRID COLOR(255, 255, 255) // White grid for 8-bit style
+#define COLOR_GRID COLOR(255, 255, 255)
 
 Grid::Grid() {
     int startX = 60;

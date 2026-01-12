@@ -6,10 +6,9 @@
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
-#include <windows.h> // Explicitly include windows.h for CreateThread
-#include <sys/stat.h> // For checking file existence
+#include <windows.h>
+#include <sys/stat.h>
 
-// 8-bit Color Palette
 #define GAME_BK_COLOR COLOR(0, 0, 0) // Black background
 #define COLOR_GRID COLOR(255, 255, 255) // White grid
 #define COLOR_TEXT COLOR(255, 255, 0) // Yellow text
@@ -60,27 +59,24 @@ bool fileExists(const std::string& name) {
 }
 
 Game::Game() : player1(new XShape(), "Player X"), player2(new OShape(), "Player O"), currentPlayer(&player1), page(0), currentState(GameState::START_PAGE), bgImage(nullptr), soundEnabled(true) {
-    initwindow(900, 600, "Tic Tac Toe - 8 Bit Edition");
+    initwindow(900, 600, "Tic Tac Toe");
     setbkcolor(GAME_BK_COLOR);
     cleardevice();
     winningLine[0] = -1;
     gameOverTimer = 0;
 
-    // Try to find the asset file
     std::string assetPath = "assets/pixel-art-night-sky-starry-space-with-shooting-stars-8-bit-pixelated-game-galaxy-seamless-background-vector.jpg";
     if (!fileExists(assetPath)) {
-        // Try absolute path if relative fails (common in IDE builds)
+
         assetPath = "C:/Users/azibf/CLionProjects/TicTacToeV3/assets/pixel-art-night-sky-starry-space-with-shooting-stars-8-bit-pixelated-game-galaxy-seamless-background-vector.jpg";
     }
 
     if (fileExists(assetPath)) {
-        // Draw to active page (which is 0 initially)
         readimagefile(assetPath.c_str(), 0, 0, 900, 600);
 
-        // Allocate memory for the image
         unsigned int imageSize = imagesize(0, 0, 900, 600);
         if (imageSize != -1) {
-            bgImage = malloc(imageSize);
+            bgImage = new char[imageSize];
             if (bgImage) {
                 getimage(0, 0, 900, 600, bgImage);
             }
@@ -89,7 +85,6 @@ Game::Game() : player1(new XShape(), "Player X"), player2(new OShape(), "Player 
         std::cerr << "Background image not found!" << std::endl;
     }
 
-    // Clear for the start of the loop
     cleardevice();
 }
 
@@ -97,7 +92,7 @@ Game::~Game() {
     delete player1.getShape();
     delete player2.getShape();
     if (bgImage) {
-        free(bgImage);
+        delete[] (char*)bgImage;
     }
 }
 
@@ -118,7 +113,6 @@ void Game::run() {
             drawScoreboard();
             grid.draw();
         } else if (currentState == GameState::GAME_OVER) {
-             // Keep drawing the game state in the background
             setcolor(COLOR_GRID);
             setlinestyle(SOLID_LINE, 0, 3);
             rectangle(35, 35, 565, 565);
@@ -187,12 +181,11 @@ void Game::run() {
 
                             // Distinct sound for each player
                             if (currentPlayer == &player1) {
-                                playSound(800, 100); // Higher pitch for X
+                                playSound(800, 100);
                             } else {
-                                playSound(600, 100); // Lower pitch for O
+                                playSound(600, 100);
                             }
 
-                            // Force redraw to show the move immediately
                             grid.draw();
                             setvisualpage(page);
 
@@ -262,7 +255,6 @@ void Game::drawStartPage() {
 
     setlinestyle(SOLID_LINE, 0, 3);
 
-    // Draw Start Button with Hover
     if (mx > 350 && mx < 550 && my > 400 && my < 475) {
         setfillstyle(SOLID_FILL, COLOR_BUTTON_HOVER);
     } else {
@@ -305,14 +297,13 @@ void Game::drawStartPage() {
     outtextxy(350 + (200 - textWidth) / 2, 515, exitText);
     setbkcolor(GAME_BK_COLOR);
 
-    // Version/Credits
+    // Version
     setcolor(COLOR(150, 150, 150));
-    settextstyle(DEFAULT_FONT, HORIZ_DIR, 1);
-    outtextxy(10, 580, (char*)"Improvised Version v1.2");
+    settextstyle(DEFAULT_FONT, HORIZ_DIR, 2);
+    outtextxy(10, 580, (char*)"Version v3");
 }
 
 void Game::drawGameOver() {
-    // Not used directly anymore, replaced by drawPopup
 }
 
 void Game::showGameOverAnimation(const std::string& message) {

@@ -26,6 +26,8 @@ private:
     std::string outcomeMessage;
     clock_t gameOverTimer;
     void* bgImage; // Buffer for background image
+    void* soundOnImage; // Buffer for sound on image
+    void* soundOffImage; // Buffer for sound off image
     bool soundEnabled;
 
 public:
@@ -44,14 +46,12 @@ private:
     void drawScoreboard();
     void animateWinningLine();
     void drawStartPage();
-    void drawGameOver(); // Kept for compatibility if needed, or I can remove/repurpose
+    void drawGameOver();
     void drawBackground();
 
-    // New methods for popup
     void showGameOverAnimation(const std::string& message);
     void drawPopup(const std::string& message);
 
-    // Helpers
     bool isMouseOver(int mx, int my, int x1, int y1, int x2, int y2);
     void drawSoundButton();
     void playSound(int freq, int duration);
